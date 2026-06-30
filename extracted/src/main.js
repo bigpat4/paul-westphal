@@ -149,20 +149,20 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     y: 38, opacity: 0, duration: 0.72, stagger: 0.16, ease
   });
 
-  // USP mark pops in, then text
-  g.from('.usp-mark', {
-    scrollTrigger: { trigger: '.usp-inner', start: 'top 83%' },
-    scale: 0.5, opacity: 0, duration: 0.52, ease: 'back.out(1.7)'
+  // Editorial section — opposing slide-in (mirrors about section)
+  g.from('.editorial-image', {
+    scrollTrigger: { trigger: '.editorial-inner', start: 'top 82%' },
+    x: -40, opacity: 0, duration: 0.9, ease
   });
-  g.from('.usp h2, .usp p, .usp .btn', {
-    scrollTrigger: { trigger: '.usp-inner', start: 'top 83%' },
-    y: 26, opacity: 0, duration: 0.68, stagger: 0.11, ease, delay: 0.14
+  g.from('.editorial-text', {
+    scrollTrigger: { trigger: '.editorial-inner', start: 'top 82%' },
+    x: 40, opacity: 0, duration: 0.9, ease, delay: 0.13
   });
 
-  // Story / testimonial cards
-  g.from('.story-card', {
-    scrollTrigger: { trigger: '.stories-grid', start: 'top 83%' },
-    y: 38, opacity: 0, duration: 0.68, stagger: 0.13, ease
+  // Social proof blocks cascade in
+  g.from('.proof-rating-block, .proof-stats-row, .proof-quote-block', {
+    scrollTrigger: { trigger: '.proof-board', start: 'top 83%' },
+    y: 32, opacity: 0, duration: 0.68, stagger: 0.18, ease
   });
 
   // FAQ items cascade
