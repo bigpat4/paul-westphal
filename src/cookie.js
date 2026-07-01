@@ -10,7 +10,7 @@
   bar.setAttribute('role', 'dialog');
   bar.setAttribute('aria-label', 'Hinweis zu Cookies');
   bar.innerHTML =
-    '<p class="cookie-text">Wir verwenden nur technisch notwendige Cookies und lokale Speicherung, damit die Website funktioniert &mdash; <strong>kein Tracking, keine Analyse, keine Weitergabe</strong>. Details in der <a href="/datenschutz.html">Datenschutzerkl&auml;rung</a>.</p>' +
+    '<p class="cookie-text">Wir verwenden nur technisch notwendige Cookies und lokale Speicherung, damit die Website funktioniert &mdash; <strong>kein Tracking, keine Analyse, keine Weitergabe</strong>. Details in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.</p>' +
     '<button type="button" class="btn btn-gold cookie-ok">Verstanden</button>';
   document.body.appendChild(bar);
   requestAnimationFrame(() => bar.classList.add('is-visible'));

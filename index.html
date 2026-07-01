@@ -13,12 +13,16 @@
   <meta name="theme-color" content="#081530" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preload" as="image" href="/images/paul-hero.jpg" fetchpriority="high">
   <link rel="preload" href="/fonts/cormorant-garamond-v21-latin-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/inter-v20-latin-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
+
+  <a href="#start" class="skip-link">Zum Inhalt springen</a>
 
   <!-- HEADER -->
   <header class="site-header">
@@ -48,9 +52,9 @@
     <!-- HERO -->
     <section class="hero" id="start">
       <div class="hero-bg" aria-hidden="true">
-        <video autoplay loop muted playsinline preload="auto" poster="/images/paul-hero.jpg">
+        <video id="hero-video" autoplay loop muted playsinline preload="metadata" poster="/images/paul-hero.jpg">
           <source src="/images/paul-hero-v3.mp4" type="video/mp4">
-          <img src="/images/paul-hero.jpg" alt="Paul Westphal – Unabhängiger Finanzberater" />
+          <img src="/images/paul-hero.jpg" alt="Paul Westphal – Finanzberater" width="1920" height="1080" />
         </video>
         <div class="hero-overlay"></div>
       </div>
@@ -60,7 +64,7 @@
         <p class="hero-sub">Ich arbeite nicht für eine Gesellschaft. Ich arbeite für dich &mdash; marktneutral, ohne Bindung, ohne versteckte Interessen.</p>
         <div class="hero-stats">
           <div class="hero-stat">
-            <strong><span class="counter" data-target="3400">3400</span>+</strong>
+            <strong><span class="counter" data-target="3400">3.400</span>+</strong>
             <small>betreute Kunden</small>
           </div>
           <div class="stat-divider" aria-hidden="true"></div>
@@ -347,7 +351,7 @@
     <section class="editorial">
       <div class="container editorial-inner">
         <div class="editorial-image">
-          <img src="/images/paul-3.jpg" alt="Paul Westphal – Unabhängiger Finanzberater" loading="lazy" />
+          <img src="/images/paul-3.jpg" alt="Paul Westphal, Finanzberater, im Beratungsgespräch" loading="lazy" decoding="async" width="900" height="1200" />
         </div>
         <div class="editorial-text">
           <p class="eyebrow">Warum das entscheidend ist</p>
@@ -531,11 +535,13 @@
 
       </div>
 
+      <p class="footer-disclaimer">Hinweis: Investitionen sind mit Risiken verbunden. Wertentwicklungen der Vergangenheit sind kein verlässlicher Indikator für die zukünftige Entwicklung. Diese Website stellt keine Anlageberatung dar.</p>
+
       <div class="footer-bottom">
         <p class="footer-copy">&copy; <span id="year"></span> Westphal+ &middot; Paul Westphal &middot; Alle Angaben ohne Gewähr.</p>
         <nav class="footer-legal-nav" aria-label="Rechtliches">
-          <a href="/impressum.html">Impressum</a>
-          <a href="/datenschutz.html">Datenschutz</a>
+          <a href="/impressum">Impressum</a>
+          <a href="/datenschutz">Datenschutz</a>
         </nav>
       </div>
     </div>

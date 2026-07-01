@@ -1,6 +1,16 @@
 // Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Respect reduced-motion for the hero background video (WCAG 2.2.2)
+(function () {
+  const v = document.getElementById('hero-video');
+  if (v && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    v.removeAttribute('autoplay');
+    v.pause();
+    v.preload = 'none';
+  }
+})();
+
 // Floating navbar — solidify on scroll past the hero fold
 const siteHeader = document.querySelector('.site-header');
 if (siteHeader) {
@@ -17,6 +27,18 @@ const mainNav = document.getElementById('main-nav');
 navToggle.addEventListener('click', () => {
   const isOpen = mainNav.classList.toggle('is-open');
   navToggle.setAttribute('aria-expanded', String(isOpen));
+  navToggle.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
+});
+
+// FAQ a11y — link each question button to its answer panel
+document.querySelectorAll('.faq-item').forEach((item, i) => {
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  if (!q || !a) return;
+  const id = 'faq-panel-' + (i + 1);
+  a.id = id;
+  a.setAttribute('role', 'region');
+  q.setAttribute('aria-controls', id);
 });
 mainNav.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
@@ -231,17 +253,32 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     showStep(4);
   }
 
+  // Trap Tab focus inside the modal while it's open (WCAG modal requirement)
+  function trapFocus(e) {
+    if (e.key !== 'Tab') return;
+    const focusables = modal.querySelectorAll(
+      'button:not([hidden]):not([disabled]), [href], input:not([hidden]), textarea:not([hidden]), select:not([hidden])'
+    );
+    const list = Array.from(focusables).filter(el => el.offsetParent !== null);
+    if (!list.length) return;
+    const first = list[0], last = list[list.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
   function open() {
     lastFocus = document.activeElement;
     overlay.hidden = false;
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(() => overlay.classList.add('is-open'));
     showStep(1);
+    modal.addEventListener('keydown', trapFocus);
     setTimeout(() => closeBtn.focus(), 50);
   }
   function close() {
     overlay.classList.remove('is-open');
     document.body.style.overflow = '';
+    modal.removeEventListener('keydown', trapFocus);
     setTimeout(() => { overlay.hidden = true; }, 350);
     if (lastFocus) lastFocus.focus();
   }
