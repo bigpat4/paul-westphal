@@ -534,8 +534,8 @@
       <div class="footer-bottom">
         <p class="footer-copy">&copy; <span id="year"></span> Westphal+ &middot; Paul Westphal &middot; Alle Angaben ohne Gewähr.</p>
         <nav class="footer-legal-nav" aria-label="Rechtliches">
-          <a href="#">Impressum</a>
-          <a href="#">Datenschutz</a>
+          <a href="/impressum.html">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
         </nav>
       </div>
     </div>
@@ -552,6 +552,59 @@
       WhatsApp
     </a>
     <a href="#kontakt" class="mobile-bar-btn mobile-bar-book">Termin buchen</a>
+  </div>
+
+  <!-- BOOKING MODAL (shell — collects a request + opens e-mail; swap for Cal.com later) -->
+  <div class="booking-overlay" id="bookingOverlay" hidden>
+    <div class="booking-modal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+      <button class="booking-close" id="bookingClose" aria-label="Schließen">&times;</button>
+      <span class="booking-eyebrow">Kostenloses Erstgespräch · 30 Min.</span>
+      <h3 class="booking-title" id="bookingTitle">Termin wählen</h3>
+      <div class="booking-steps" aria-hidden="true">
+        <span class="dot is-active"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+
+      <div class="booking-body">
+        <!-- Step 1: choose slot -->
+        <div class="booking-step" data-step="1">
+          <p class="booking-hint">Wähle einen Tag und eine Uhrzeit — unverbindlich, digital oder vor Ort.</p>
+          <div class="booking-days" id="bookingDays"></div>
+          <div class="booking-times" id="bookingTimes"></div>
+        </div>
+
+        <!-- Step 2: details -->
+        <div class="booking-step" data-step="2" hidden>
+          <div class="booking-field"><label for="bkName">Name</label><input type="text" id="bkName" autocomplete="name" placeholder="Vor- und Nachname"></div>
+          <div class="booking-field"><label for="bkEmail">E-Mail</label><input type="email" id="bkEmail" autocomplete="email" placeholder="name@beispiel.de"></div>
+          <div class="booking-field"><label for="bkPhone">Telefon (optional)</label><input type="tel" id="bkPhone" autocomplete="tel" placeholder="Für einen Rückruf"></div>
+          <div class="booking-field"><label for="bkMsg">Worum geht's? (optional)</label><textarea id="bkMsg" rows="3" placeholder="z. B. Altersvorsorge, bestehende Verträge prüfen …"></textarea></div>
+        </div>
+
+        <!-- Step 3: confirm -->
+        <div class="booking-step" data-step="3" hidden>
+          <p class="booking-hint">Passt alles? Dann senden wir Paul deine Anfrage.</p>
+          <div class="booking-summary" id="bookingSummary"></div>
+        </div>
+
+        <!-- Step 4: success -->
+        <div class="booking-step booking-success" data-step="4" hidden>
+          <div class="booking-success-check" aria-hidden="true">✓</div>
+          <h4>Anfrage gesendet!</h4>
+          <p id="bookingSuccessMsg">Danke! Deine Terminanfrage ist unterwegs zu Paul. Er bestätigt dir den Termin persönlich per E-Mail.</p>
+          <div class="booking-success-contacts">
+            <a href="tel:017683248334">Anrufen</a>
+            <a href="https://wa.me/4917683248334" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="mailto:Paul.Westphal@Westphal-plus.de">E-Mail</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-foot" id="bookingFoot">
+        <button type="button" class="btn booking-back" id="bookingBack" hidden>Zurück</button>
+        <button type="button" class="btn btn-gold booking-next" id="bookingNext" disabled>Weiter</button>
+      </div>
+      <p class="booking-disclaimer">Unverbindlich · Es entstehen keine Kosten · Deine Daten werden nur zur Terminvereinbarung genutzt.</p>
+    </div>
   </div>
 
   <!-- ============================================================
