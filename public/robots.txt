@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://extracted-three-henna.vercel.app/sitemap.xml
