@@ -75,10 +75,12 @@ document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
 // Stacking scroll cards (Apple/Linear style)
 (function () {
   const cards = Array.from(document.querySelectorAll('#systemStack .stack-card'));
-  if (!cards.length || window.matchMedia('(max-width: 768px)').matches) return;
+  if (!cards.length) return;
+  const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 
   const onScroll = () => {
     const vh = window.innerHeight;
+    const depth = isMobile() ? 0.03 : 0.04; // gentler scale-down on small screens
     cards.forEach((card, i) => {
       const next = cards[i + 1];
       if (!next) {
@@ -90,7 +92,7 @@ document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
       const start = vh * 0.85;
       const end = 140;
       const p = Math.min(1, Math.max(0, (start - r.top) / (start - end)));
-      const scale = 1 - p * 0.04 * (cards.length - i);
+      const scale = 1 - p * depth * (cards.length - i);
       card.style.setProperty('--s', scale);
       card.style.opacity = 1;
     });

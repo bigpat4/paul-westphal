@@ -539,13 +539,18 @@ ul { margin: 0; padding: 0; list-style: none; }
 .btn-card-cta { margin-top: 12px; }
 
 @media (max-width: 768px) {
-  .stack-card { position: relative !important; top: auto !important; transform: none !important; margin-bottom: 16px; border-radius: 16px; }
-  .card-inner { grid-template-columns: 1fr; padding: 36px 28px; min-height: auto; gap: 28px; }
-  .card-visual { min-height: 180px; order: -1; }
-  .card-icon { width: 72px; height: 72px; }
-  .card-ghostnum { font-size: 6rem; }
+  /* Keep the desktop stacking-scroll effect on mobile — just single-column inside */
+  .stack-card { top: calc(78px + var(--i, 0) * 14px); margin-bottom: 18px; border-radius: 16px; }
+  .card-inner { grid-template-columns: 1fr; padding: 32px 26px; min-height: auto; gap: 24px; }
+  .card-visual { min-height: 210px; order: -1; }
+  .card-icon { width: 88px; height: 88px; }
+  .card-ghostnum { font-size: 7rem; }
 }
 @media (prefers-reduced-motion: reduce) { .stack-card { transition: none; } }
+/* If the reveal/JS never runs, keep cards statically visible + un-pinned as a safe fallback */
+@media (max-width: 768px) {
+  html:not(.js) .stack-card { position: relative; top: auto; }
+}
 
 /* ===== SERVICES ===== */
 .services { padding: 100px 0; background: var(--white); }
@@ -625,7 +630,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 @media (max-width: 860px) {
   .editorial-inner { grid-template-columns: 1fr; gap: 40px; }
-  .editorial-image { max-width: 260px; }
+  .editorial-image { max-width: 300px; margin: 0 auto; justify-self: center; }
 }
 
 /* ===== SOCIAL PROOF ===== */
@@ -804,12 +809,12 @@ ul { margin: 0; padding: 0; list-style: none; }
   text-align: center;
   overflow: hidden;
 }
-.contact-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.contact h2 { color: var(--white); font-size: 2.4rem; margin: 0; }
-.contact .lead { color: rgba(255,255,255,0.78); font-size: 1.05rem; margin: 0; }
+.contact-inner { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.contact h2 { color: var(--white); font-size: 2.4rem; margin: 0; max-width: 640px; }
+.contact .lead { color: rgba(255,255,255,0.78); font-size: 1.05rem; margin: 0; max-width: 620px; }
 .contact-cards {
   display: flex;
-  gap: 14px;
+  gap: 22px;
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
@@ -817,17 +822,17 @@ ul { margin: 0; padding: 0; list-style: none; }
 .contact-card {
   border: 1px solid rgba(255,255,255,0.18);
   border-radius: var(--radius);
-  padding: 18px 24px;
-  flex: 1;
-  min-width: 180px;
-  max-width: 220px;
+  padding: 22px 20px;
+  flex: 1 1 270px;
+  min-width: 220px;
+  max-width: 296px;
   transition: border-color 0.15s ease;
   text-align: center;
 }
 .contact-card:hover { border-color: var(--gold); }
 .contact-whatsapp:hover { border-color: #25D366; }
-.contact-label { display: block; font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
-.contact-value { font-weight: 600; font-size: 0.92rem; }
+.contact-label { display: block; font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+.contact-value { font-weight: 600; font-size: 0.85rem; overflow-wrap: break-word; }
 
 /* ===== FOOTER ===== */
 .site-footer {
@@ -1276,4 +1281,18 @@ ul { margin: 0; padding: 0; list-style: none; }
 
   /* Section intros a touch tighter */
   .services h2, .faq-section h2, .social-proof h2 { margin-bottom: 36px; }
+
+  /* Center content blocks on phones */
+  .about-text { text-align: center; }
+  .about-credentials { justify-content: center; }
+  .about-text .btn { align-self: center; }
+  .editorial-text { text-align: center; }
+  .check-list { align-items: center; }
+  .check-list li { text-align: left; }
+  .editorial-text .btn { align-self: center; }
+
+  /* Footer brand (logo + company name) centered */
+  .footer-brand-col { text-align: center; }
+  .footer-brand-col .footer-logo-link { justify-content: center; }
+  .footer-creds { align-items: center; }
 }
